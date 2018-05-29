@@ -1,0 +1,17 @@
+let mongoose =require ('mongoose')
+let Schema = mongoose.Schema
+let ObjectId= Schema.Types.ObjectId
+
+let schemaName = 'Task'
+
+let schema = new Schema ({
+  title: {type: String, required:true},
+  body : { type: {}},
+  author: {type: String, ref: 'User'},
+  boardId:{type: ObjectId},
+  listId:{type: ObjectId, required: true},
+  taskId:{type:ObjectId, required: true},
+  createDate:{type: Number, default: Date.now(), required: true}
+})
+
+module.exports=mongoose.model(schemaName, schema)
