@@ -10,11 +10,10 @@ router.post('/auth/register', (req, res) => {
       error: 'Password must be at least 6 characters'
     })
   }
-  req.body.role = 'guest'
-  req.body.hash = Users.generateHash(req.body.password)
+  req.body.password = Users.generateHash(req.body.password)
   Users.create(req.body)
     .then(user => {
-      delete user._doc.hash
+      delete user._doc.password
       req.session.uid = user._id
       res.send(user)
     })
@@ -25,17 +24,16 @@ router.post('/auth/register', (req, res) => {
 
 router.post('/auth/login', (req, res) => {
   Users.findOne({
-      username: req.body.username
+      email: req.body.email
     })
     .then(user => {
       if (!user) {
         return res.status(400).send(loginError)
       }
-
       if (!user.validatePassword(req.body.password)) {
         return res.status(400).send(loginError)
       }
-      delete user._doc.hash
+      delete user._doc.password
       req.session.uid = user._id
       res.send(user)
     }).catch(err => {
@@ -54,74 +52,6 @@ router.delete('/auth/logout', (req, res) => {
   })
 })
 
-
-router.put('/user/role-change/:uid?', (req, res) => {
-  //change your own role
-  if (!req.params.uid) {
-    Users.findById(req.session.uid)
-      .then(user => {
-        if (!user) {
-          return res.status(401).send(loginError)
-        }
-        user.role = user.changeRole(req.body.role)
-        user.save().then(() => {
-            res.send(user)
-          })
-          .catch(err => {
-            res.status(500).send(err)
-          })
-
-      }).catch(err => {
-        res.status(500).send(err)
-      })
-  }
-
-  /**
-   * find current user
-   * find other person
-   * 
-   * myRole > otherPersonsRole
-   * otherPersonRole = reqRole
-   * otherPerson.save()
-   * 
-   */
-
-  Users.findById(req.session.uid).then(currentUser => {
-    if (!currentUser) {
-      return res.status(401).send(loginError)
-    }
-
-    Users.findById(req.params.uid).then(otherUser => {
-      if (!otherUser) {
-        return res.status(400).send({
-          error: 'invalid user id'
-        })
-      }
-
-      if (!currentUser.setRoleForOther(otherUser, req.body.role)) {
-        return res.status(401).send({
-          error: 'no can do'
-        })
-      }
-
-      otherUser.save().then(() => {
-        res.send({
-          message: 'Success roled to ' + otherUser.role
-        })
-      }).catch(err => {
-        res.status(500).send(err)
-      })
-    })
-
-
-  })
-
-
-
-})
-
-
-
 router.get('/authenticate', (req, res) => {
   Users.findById(req.session.uid)
     .then(user => {
@@ -130,14 +60,12 @@ router.get('/authenticate', (req, res) => {
           error: 'Please login to continue'
         })
       }
-      delete user._doc.hash
+      delete user._doc.password
       res.send(user)
     }).catch(err => {
       res.status(500).send(err)
     })
 })
-
-
 
 
 module.exports = {

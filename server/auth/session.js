@@ -12,7 +12,7 @@ store.on("error", function(err) {
 
 // @ts-ignore
 var session = expressSession({
-  secret: "dKJJHDLIhaslkcjhs ddhLSJLDJS  DJkkjs;dljAS LDJa;osudowueouw xxncxkx", //CHANGE ME!!!!
+  secret: "asdfasf aodjflasdj ajdouqwoiefurf ououaposud", //CHANGE ME!!!!
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7 * 52 * 2,
   },
@@ -21,4 +21,4 @@ var session = expressSession({
   saveUninitialized: true
 });
 
-module.exports = session;
+module.exports = session
