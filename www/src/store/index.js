@@ -22,34 +22,43 @@ export default new vuex.Store({
     user: {}
   },
   mutations: {
-    setUser(state, user){
+    regUser(state, user) {
       state.user = user
     },
-    deleteUser(state){
+    setUser(state, user) {
+      state.user = user
+    },
+    deleteUser(state) {
       state.user = {}
     }
   },
   actions: {
 
     //AUTH STUFF
-    login({commit, dispatch}, loginCredentials){
-        auth.post('login', loginCredentials)
-        .then(res=>{
+    
+    login({ commit, dispatch }, loginCredentials) {
+      auth.post('login', loginCredentials)
+        .then(res => {
           commit('setUser', res.data)
-          router.push({name: 'Home'})
+          router.push({ name: 'Home' })
         })
     },
-    logout({commit, dispatch}){
+    logout({ commit, dispatch }) {
     },
-    register({commit, dispatch}, userData){
+    register({ commit, dispatch }, registerCredentials) {
+      auth.post('register', registerCredentials)
+        .then(res => {
+          commit('regUser', res.data)
+          router.push({ name: 'login' })
+        })
     },
-    authenticate({commit, dispatch}){
+    authenticate({ commit, dispatch }) {
       api.get('/authenticate')
-        .then(res=>{
+        .then(res => {
           commit('setUser', res.data)
-          router.push({name: 'Home'})
+          router.push({ name: 'Home' })
         })
-        .catch(res=>{
+        .catch(res => {
           console.log(res.data)
         })
     }

@@ -1,10 +1,15 @@
 <template>
   <div class="login-page">
     <form  @submit.prevent="userLogin">
+      <label for="text">Email</label>
       <input type="text" name="email" id="email" v-model="login.email">
-      <input type="password" name="password" id="password" v-model="login.password">
-      <button type="submit">LOGIN</button>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" v-model="login.password" >
+      <button type="submit">LOGIN</button> <br> 
+      
     </form>
+    <label for="submit">Register User</label>
+    <button @click="userReg">REGISTER</button>
   </div>
 </template>
 
@@ -26,7 +31,10 @@
     methods: {
       userLogin(){
         this.$store.dispatch('login', this.login)
-      }
+      },
+       userReg(){
+        this.$router.push({name: 'Register'})
+       }
     }
   }
 </script>
