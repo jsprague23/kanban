@@ -5,8 +5,8 @@ let ObjectId= Schema.Types.ObjectId
 let schemaName = 'Comment'
 
 let schema = new Schema ({
-  body : { type: {}},
-  author: {type: String, ref: 'User'},
+  body : { type: String},
+  author: {type: ObjectId, ref: 'User'},
   boardId:{type: ObjectId},
   listId:{type: ObjectId},
   taskId:{type:ObjectId, required: true},
