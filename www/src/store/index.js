@@ -28,7 +28,7 @@ export default new vuex.Store({
     setUser(state, user) {
       state.user = user
     },
-    deleteUser(state) {
+    delUser(state) {
       state.user = {}
     }
   },
@@ -42,18 +42,32 @@ export default new vuex.Store({
           commit('setUser', res.data)
           router.push({ name: 'Home' })
         })
+        .catch(res => {
+          console.log(res.data)
+        })
     },
-    logout({ commit, dispatch }) {
+    logout({ commit, dispatch }, deleteCredentials) {
+      auth.delete('logout', deleteCredentials)
+      .then(res=>{
+        commit('delUser', res.data)
+        router.push({name:'login'})
+      })
+      .catch(res => {
+        console.log(res.data)
+      })
     },
     register({ commit, dispatch }, registerCredentials) {
       auth.post('register', registerCredentials)
         .then(res => {
           commit('regUser', res.data)
-          router.push({ name: 'login' })
+          router.push({ name: 'Home' })
+        })
+        .catch(res => {
+          console.log(res.data)
         })
     },
     authenticate({ commit, dispatch }) {
-      api.get('/authenticate')
+      auth.get('/authenticate')
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'Home' })

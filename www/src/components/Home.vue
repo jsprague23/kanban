@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    MAIN
+  <div class="home-page">
+     Main 
   </div>
 </template>
 
@@ -18,7 +18,12 @@
       }
     },
     computed: {},
-    methods: {}
+    methods: {
+      // userDel(){
+      //   this.$session.destroy();
+      //    this.$router.push({name: 'login'})
+      //  }
+    }
   }
 </script>
 

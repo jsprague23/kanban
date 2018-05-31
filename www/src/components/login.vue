@@ -35,6 +35,7 @@
        userReg(){
         this.$router.push({name: 'Register'})
        }
+       
     }
   }
 </script>
