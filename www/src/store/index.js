@@ -19,7 +19,8 @@ var auth = axios.create({
 
 export default new vuex.Store({
   state: {
-    user: {}
+    user: {},
+    board: {}
   },
   mutations: {
     regUser(state, user) {
@@ -30,12 +31,15 @@ export default new vuex.Store({
     },
     delUser(state) {
       state.user = {}
+    },
+    addBoard(state, board){
+      state.board={}
     }
   },
   actions: {
 
     //AUTH STUFF
-    
+
     login({ commit, dispatch }, loginCredentials) {
       auth.post('login', loginCredentials)
         .then(res => {
@@ -48,13 +52,13 @@ export default new vuex.Store({
     },
     logout({ commit, dispatch }, deleteCredentials) {
       auth.delete('logout', deleteCredentials)
-      .then(res=>{
-        commit('delUser', res.data)
-        router.push({name:'login'})
-      })
-      .catch(res => {
-        console.log(res.data)
-      })
+        .then(res => {
+          commit('delUser', res.data)
+          router.push({ name: 'login' })
+        })
+        .catch(res => {
+          console.log(res.data)
+        })
     },
     register({ commit, dispatch }, registerCredentials) {
       auth.post('register', registerCredentials)
@@ -75,9 +79,18 @@ export default new vuex.Store({
         .catch(res => {
           console.log(res.data)
         })
-    }
+    },
 
     //APP STUFF
-
+    actionBoard({ commit, dispatch }) {
+      auth.post('/board')
+      .then(res=>{
+        commit('addBoard', res.data)
+        router.push({name: 'board'})
+      })
+      .catch(res => {
+        console.log(res.data)
+      })
+    }
   }
 })

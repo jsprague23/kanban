@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import login from '@/components/login'
 import register from '@/components/register'
+import modal from '@/components/modal'
+import board from '@/components/board'
 // import del from '@components/Home'
 
 Vue.use(Router)
@@ -28,6 +30,11 @@ export default new Router({
      name: 'Register', 
      component: register
     },
+    {
+      path:'/board',
+      name: 'Board',
+      component:board
+    }
   
   ]
 })

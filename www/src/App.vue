@@ -14,6 +14,7 @@
         this.$store.dispatch('logout', this.logout)
       }
     }
+    
   }
 </script>
 
