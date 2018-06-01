@@ -2,8 +2,7 @@ var express = require('express')
 var bp = require('body-parser')
 var app = express()
 var cors = require('cors')
-var port = 3000
-
+var port = process.env.PORT || 3000
 app. use(express.static(__dirname + '../www/dist'))
 
 var whitelist = ['http://localhost:8080', 'https://khanbhan.herokuapp.com'];
