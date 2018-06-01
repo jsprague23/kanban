@@ -31,7 +31,7 @@ export default new Router({
      component: register
     },
     {
-      path:'/board',
+      path:'/boards/:id',
       name: 'Board',
       component:board
     }

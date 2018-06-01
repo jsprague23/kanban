@@ -11,12 +11,16 @@
         </div>
         <div>
           <form @submit.prevent="createBoard">
-            <input type="text" v-model="boardName" required>
+            <input type="text" v-model="board.title" required>
             <button type="submit">Create Board</button>
           </form>
         </div>
       </modal>
     </div>
+    <ul class="boards">
+      <h3>My Boards</h3>
+      <li class="boards" v-for="board in boards"><router-link :to="{name: 'Board', params:{id:board._id}}">{{board.title}}</router-link></li>
+    </ul>
   </div>
 </template>
 
@@ -30,17 +34,25 @@
       if (!this.$store.state.user._id) {
         router.push({ name: 'login' })
       }
+      this.$store.dispatch('getBoards')
     },
     data() {
       return {
         showModal: 0,
-        boardName: ''
+        board:{
+          title: ''
+        },
+        
       }
     },
-    computed: {},
+    computed: {
+      boards(){
+        return this.$store.state.boards
+      }
+    },
     methods: {
       createBoard() {
-        this.$store.dispatch('actionBoard', this.actionBoard)
+        this.$store.dispatch('actionBoard', this.board)
         this.toggleModal(-1)
       },
       toggleModal(n){

@@ -8,7 +8,10 @@
     import router from '../router'
     export default {
       name: '',
-      mounted(){},
+      mounted(){
+        
+        this.$store.dispatch('getBoard',this.$route.params.id)
+      },
       data() {},
       computed: {},
       methods: {}

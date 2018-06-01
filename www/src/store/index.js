@@ -7,7 +7,7 @@ import router from "../router"
 vue.use(vuex)
 
 var api = axios.create({
-  baseURL: 'localhost:3000/',
+  baseURL: 'http://localhost:3000/api/',
   timeout: 3000,
   withCredentials: true
 })
@@ -20,7 +20,8 @@ var auth = axios.create({
 export default new vuex.Store({
   state: {
     user: {},
-    board: {}
+    board: {},
+    boards: []
   },
   mutations: {
     regUser(state, user) {
@@ -34,6 +35,12 @@ export default new vuex.Store({
     },
     addBoard(state, board){
       state.board={}
+    },
+    setBoards(state, boards){
+      state.boards=boards
+    },
+    setBoard(state, board){
+      state.board=board
     }
   },
   actions: {
@@ -82,14 +89,25 @@ export default new vuex.Store({
     },
 
     //APP STUFF
-    actionBoard({ commit, dispatch }) {
-      auth.post('/board')
+    actionBoard({ commit, dispatch }, board) {
+      api.post('/boards', board)
       .then(res=>{
-        commit('addBoard', res.data)
-        router.push({name: 'board'})
-      })
+        dispatch("getBoards")
+        })
       .catch(res => {
-        console.log(res.data)
+        console.log("test")
+      })
+    },
+    getBoards({commit, dispatch}){
+      api.get('/boards')
+      .then(res=>{
+        commit("setBoards", res.data)
+      })
+    },
+    getBoard({commit,dispatch}, boardId){
+      api.get('/boards/'+ boardId)
+      .then(res=>{
+        commit('setBoard', res.data)
       })
     }
   }
