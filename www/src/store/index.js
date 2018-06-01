@@ -43,11 +43,18 @@ export default new vuex.Store({
       state.board={}
     },
     setBoards(state, boards){
-      state.boards=boards
+      state.boards = boards
     },
     setBoard(state, board){
-      state.board=board
+      state.board = board
+    },
+    setLists(state, lists){
+      state.lists = lists
+    },
+    setList(state, list){
+      state.list = list
     }
+
   },
   actions: {
 
@@ -101,16 +108,17 @@ export default new vuex.Store({
         dispatch("getBoards")
         })
       .catch(res => {
-        console.log("test")
+       alert("err") 
       })
     },
     actionList({ commit, dispatch }, list) {
+      console.log(list)
       api.post('/lists', list)
       .then(res=>{
         dispatch("getLists")
         })
       .catch(res => {
-        console.log("test")
+        alert("err") 
       })
     },
     actionTask({ commit, dispatch }, task) {
@@ -119,7 +127,7 @@ export default new vuex.Store({
         dispatch("getTasks")
         })
       .catch(res => {
-        console.log("test")
+        alert("err") 
       })
     },
     getBoards({commit, dispatch}){

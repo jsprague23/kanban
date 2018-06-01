@@ -6,7 +6,7 @@
       <label for="password">Password</label>
       <input type="password" name="password" id="password" v-model="login.password" >
       <button type="submit">LOGIN</button> <br> 
-      
+      <!-- <i class="fas fa-infinity"></i> -->
     </form>
     <label for="submit">Register User</label>
     <button @click="userReg">REGISTER</button>

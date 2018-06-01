@@ -3,7 +3,7 @@
     Main
     <!-- <button type="@click=createBoard">Create a Board</button> -->
     <div id="app">
-      <button @click="toggleModal(1)">Show Modal</button>
+      <button @click="toggleModal(1)">Create a Board</button>
       <!-- use the modal component, pass in the prop -->
       <modal :toggle="showModal">
         <div slot="header">

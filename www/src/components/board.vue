@@ -1,17 +1,17 @@
 <template>
-  <div class="">
+  <div class="board-page">
     <h3 class="boards">{{returnBoard.title}}</h3>
     <div id="app">
-      <button @click="toggleModal(1)">Show Modal</button>
+      <button @click="toggleModal(1)">Create a List</button>
       <!-- use the modal component, pass in the prop -->
       <modal :toggle="showModal">
         <div slot="header">
-          <h3>Create Board</h3>
+          <h3>Create List</h3>
         </div>
         <div>
-          <form @submit.prevent="createBoard">
-            <input type="text" v-model="board.title" required>
-            <button type="submit">Create Board</button>
+          <form @submit.prevent="createList">
+            <input type="text" v-model="list.title" required>
+            <button type="submit">Create List</button>
           </form>
         </div>
       </modal>
@@ -27,11 +27,13 @@
     components: { modal },
     mounted() {
       this.$store.dispatch('getBoard', this.$route.params.id)
+      this.$store.dispatch('getLists')
     },
     data() {
       return {
         showModal: 0,
         list: {
+          boardId:this.$route.params.id,
           title: ''
         },
         boards: {}
@@ -40,7 +42,10 @@
     computed: {
       returnBoard() {
         return this.$store.state.board
-      }
+        },
+        returnLists(){
+          return this.$store.state.lists
+        }
     },
     methods: {
       createList() {
