@@ -3,16 +3,18 @@ import vuex from 'vuex'
 import axios from 'axios'
 import router from "../router"
 
+var production = !window.location.host.includes('localhost');
+var baseUrl = production ? '//khanbhan.herokuapp.com/' : '//localhost:3000/';
 
 vue.use(vuex)
 
 var api = axios.create({
-  baseURL: 'http://localhost:3000/api/',
+  baseURL: baseUrl + 'api/',
   timeout: 3000,
   withCredentials: true
 })
 var auth = axios.create({
-  baseURL: 'http://localhost:3000/auth/',
+  baseURL: baseUrl + 'auth/',
   timeout: 3000,
   withCredentials: true
 })
@@ -21,7 +23,11 @@ export default new vuex.Store({
   state: {
     user: {},
     board: {},
-    boards: []
+    boards: [],
+    list: {},
+    lists: [],
+    task: {},
+    tasks: [],
   },
   mutations: {
     regUser(state, user) {
@@ -98,6 +104,24 @@ export default new vuex.Store({
         console.log("test")
       })
     },
+    actionList({ commit, dispatch }, list) {
+      api.post('/lists', list)
+      .then(res=>{
+        dispatch("getLists")
+        })
+      .catch(res => {
+        console.log("test")
+      })
+    },
+    actionTask({ commit, dispatch }, task) {
+      api.post('/tasks', task)
+      .then(res=>{
+        dispatch("getTasks")
+        })
+      .catch(res => {
+        console.log("test")
+      })
+    },
     getBoards({commit, dispatch}){
       api.get('/boards')
       .then(res=>{
@@ -109,6 +133,30 @@ export default new vuex.Store({
       .then(res=>{
         commit('setBoard', res.data)
       })
-    }
+    },
+    getLists({commit, dispatch}){
+      api.get('/lists')
+      .then(res=>{
+        commit("setLists", res.data)
+      })
+    },
+    getList({commit,dispatch}, listId){
+      api.get('/lists/'+ listId)
+      .then(res=>{
+        commit('setList', res.data)
+      })
+    },
+    getTasks({commit, dispatch}){
+      api.get('/tasks')
+      .then(res=>{
+        commit("setTasks", res.data)
+      })
+    },
+    getTask({commit,dispatch}, taskId){
+      api.get('/tasks/'+ taskId)
+      .then(res=>{
+        commit('setTask', res.data)
+      })
+    },
   }
 })
