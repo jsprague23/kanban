@@ -1,10 +1,10 @@
 <template>
-  <div class="board-page">
-    <h3 class="boards">{{returnBoard.title}}</h3>
-    <div id="app">
+  <div class="list-page">
+    <h3 class="lists">{{Lists.title}}</h3>
+    <!-- <div id="app">
       <button @click="toggleModal(1)">Create a List</button>
       <!-- use the modal component, pass in the prop -->
-      <modal :toggle="showModal">
+    <!-- <modal :toggle="showModal">
         <div slot="header">
           <h3>Create List</h3>
         </div>
@@ -15,47 +15,53 @@
           </form>
         </div>
       </modal>
-    </div>
-    <lists :list="Lists"></lists>
+    </div> -->
+    
+    <ul>
+      <li class="lists" v-for="list in lists" v-bind:title="list.title">test</li>
+    </ul>
+    <h3>Hello Heaven</h3>
   </div>
 </template>
 
 <script>
   import router from '../router'
   import modal from './modal'
-  import lists from './lists.vue'
   export default {
-    name: '',
+    name: 'lists',
+    props: ['banana'],
     mounted() {
-      this.$store.dispatch('getBoard', this.$route.params.id)
-      this.$store.dispatch('getLists')
+      this.$store.dispatch('getLists', this.$route.params)
     },
-    components: { modal, lists },
+    components: { modal },
     data() {
       return {
         showModal: 0,
         list: {
-          boardId:this.$route.params.id,
+          boardId: this.$route.params.id,
           title: ''
         },
-        // boards: {}
+        lists: {}
       }
     },
     computed: {
       returnBoard() {
         return this.$store.state.board
-        },
-        Lists(){
-          return this.$store.state.lists
-        }
+      },
+      Lists() {
+        return this.$store.state.lists
+      },
+      list(){
+        return this .$store.state.list
+      }
     },
     methods: {
       createList() {
         this.$store.dispatch('actionList', this.list)
         this.toggleModal(-1)
       },
-      toggleModal(n){
-        this.showModal +=n
+      toggleModal(n) {
+        this.showModal += n
       },
     }
   }

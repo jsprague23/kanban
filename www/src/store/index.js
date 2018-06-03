@@ -50,6 +50,7 @@ export default new vuex.Store({
     },
     setLists(state, lists){
       state.lists = lists
+
     },
     setList(state, list){
       state.list = list

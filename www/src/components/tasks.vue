@@ -9,6 +9,15 @@
           <h3>Create List</h3>
         </div>
         <div>
+            <!-- Vue.component('my-checkbox', {
+              template: `<div class="checkbox-wrapper" @click="check"><div :class="{ checkbox: true, checked: checked }"></div><div class="title"></div></div>`,
+              data() {
+                return { checked: false, title: 'Check me' }
+              },
+              methods: {
+                check() { this.checked = !this.checked; }
+              }
+            }); -->
           <form @submit.prevent="createList">
             <input type="text" v-model="list.title" required>
             <button type="submit">Create List</button>
@@ -16,21 +25,20 @@
         </div>
       </modal>
     </div>
-    <lists :list="Lists"></lists>
+    <h3 class="lists" v-for="list in lists">{{returnLists.title}}</h3>
   </div>
 </template>
 
 <script>
   import router from '../router'
   import modal from './modal'
-  import lists from './lists.vue'
   export default {
     name: '',
+    components: { modal },
     mounted() {
       this.$store.dispatch('getBoard', this.$route.params.id)
       this.$store.dispatch('getLists')
     },
-    components: { modal, lists },
     data() {
       return {
         showModal: 0,
@@ -38,14 +46,14 @@
           boardId:this.$route.params.id,
           title: ''
         },
-        // boards: {}
+        boards: {}
       }
     },
     computed: {
       returnBoard() {
         return this.$store.state.board
         },
-        Lists(){
+        returnLists(){
           return this.$store.state.lists
         }
     },
