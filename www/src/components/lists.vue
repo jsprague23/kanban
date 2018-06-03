@@ -1,8 +1,7 @@
 <template>
   <div class="list-page">
-    <h3 class="lists">{{Lists.title}}</h3>
-    <!-- <div id="app">
-      <button @click="toggleModal(1)">Create a List</button>
+     <!-- <div id="app">
+      <button @click="toggleModal(1)">Create a List</button> -->
       <!-- use the modal component, pass in the prop -->
     <!-- <modal :toggle="showModal">
         <div slot="header">
@@ -18,9 +17,9 @@
     </div> -->
     
     <ul>
-      <li class="lists" v-for="list in lists" v-bind:title="list.title">test</li>
+      <li class="listings" v-for="list in returnList">{{list.title}}</li>
     </ul>
-    <h3>Hello Heaven</h3>
+    <!-- <h3>Hello Heaven</h3> -->
   </div>
 </template>
 
@@ -28,31 +27,22 @@
   import router from '../router'
   import modal from './modal'
   export default {
-    name: 'lists',
-    props: ['banana'],
+    name: 'klists',
     mounted() {
       this.$store.dispatch('getLists', this.$route.params)
     },
     components: { modal },
+    props:['list'],
     data() {
       return {
         showModal: 0,
-        list: {
-          boardId: this.$route.params.id,
-          title: ''
-        },
-        lists: {}
+        lists: {
+                  },
       }
     },
     computed: {
-      returnBoard() {
-        return this.$store.state.board
-      },
-      Lists() {
+      returnList() {
         return this.$store.state.lists
-      },
-      list(){
-        return this .$store.state.list
       }
     },
     methods: {

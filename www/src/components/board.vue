@@ -16,21 +16,22 @@
         </div>
       </modal>
     </div>
-    <lists :list="Lists"></lists>
+    <klists></klists>
   </div>
 </template>
 
 <script>
   import router from '../router'
   import modal from './modal'
-  import lists from './lists.vue'
-  export default {
-    name: '',
+  import klists from './lists.vue'
+ 
+ export default {
+    name: 'board',
     mounted() {
       this.$store.dispatch('getBoard', this.$route.params.id)
       this.$store.dispatch('getLists')
     },
-    components: { modal, lists },
+    components: { modal, klists },
     data() {
       return {
         showModal: 0,
@@ -38,16 +39,13 @@
           boardId:this.$route.params.id,
           title: ''
         },
-        // boards: {}
+      //   lists: {}
       }
     },
     computed: {
       returnBoard() {
         return this.$store.state.board
         },
-        Lists(){
-          return this.$store.state.lists
-        }
     },
     methods: {
       createList() {

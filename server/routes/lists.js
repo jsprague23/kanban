@@ -5,6 +5,7 @@ var Lists = require('../models/list')
 router.get('/api/lists', (req, res, next) => {
   Lists.find({})
     .then(lists => {
+      console.log(lists)
       res.status(200).send(lists)
     })
     .catch(err => {
