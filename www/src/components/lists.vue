@@ -15,10 +15,17 @@
         </div>
       </modal>
     </div> -->
-    
-    <ul>
-      <li class="listings" v-for="list in returnList">{{list.title}}</li>
-    </ul>
+    <div class="col-sm-2 my-3">
+<!-- <div class="car bg-dark text-white w-100 h-100"> -->
+<div class="card bg-dark text-white w-100 h-100" v-for="list in returnList">
+  <h3>{{list.title}}</h3>
+
+
+
+  </div>
+      <!-- <h3 class="listings" v-for="list in returnList">{{list.title}}</h3> -->
+   <!-- </div> -->
+    </div>
     <!-- <h3>Hello Heaven</h3> -->
   </div>
 </template>
@@ -29,7 +36,7 @@
   export default {
     name: 'klists',
     mounted() {
-      this.$store.dispatch('getLists', this.$route.params)
+      this.$store.dispatch('getLists', this.$route.params.id)
     },
     components: { modal },
     props:['list'],

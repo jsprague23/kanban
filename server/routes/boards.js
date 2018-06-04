@@ -15,8 +15,8 @@ router.post('/api/boards', (req, res, next) => {
 })
 
 //finds all boards by creator id still not sure if working
-router.get('/api/boards', (req, res, next) => {
-  Boards.find({})
+router.get('/api/ownedboards/:id', (req, res, next) => {
+  Boards.find({author: req.params.id})
     .then(boards => {
       res.status(200).send(boards)
     })

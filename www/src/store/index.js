@@ -113,8 +113,7 @@ export default new vuex.Store({
       })
     },
     actionList({ commit, dispatch }, list) {
-      console.log(list)
-      api.post('/lists', list)
+       api.post('/lists', list)
       .then(res=>{
         dispatch("getLists")
         })
@@ -131,8 +130,8 @@ export default new vuex.Store({
         alert("err") 
       })
     },
-    getBoards({commit, dispatch}){
-      api.get('/boards')
+    getBoards({commit, dispatch}, user){
+      api.get('/ownedboards/'+ user)
       .then(res=>{
         commit("setBoards", res.data)
       })
@@ -143,8 +142,8 @@ export default new vuex.Store({
         commit('setBoard', res.data)
       })
     },
-    getLists({commit, dispatch}){
-      api.get('/lists')
+    getLists({commit, dispatch}, boardId){
+      api.get('/lists/'+ boardId)
       .then(res=>{
         commit("setLists", res.data)
       })

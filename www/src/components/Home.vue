@@ -34,7 +34,7 @@
       if (!this.$store.state.user._id) {
         router.push({ name: 'login' })
       }
-      this.$store.dispatch('getBoards')
+      this.$store.dispatch('getBoards', this.$store.state.user._id)
     },
     data() {
       return {

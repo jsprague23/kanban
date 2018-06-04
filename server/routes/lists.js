@@ -2,10 +2,9 @@ var router = require('express').Router()
 var Lists = require('../models/list')
 
 //GET ALL
-router.get('/api/lists', (req, res, next) => {
-  Lists.find({})
-    .then(lists => {
-      console.log(lists)
+router.get('/api/lists/:id', (req, res, next) => {
+Lists.find({boardId: req.params.id})
+  .then(lists => {
       res.status(200).send(lists)
     })
     .catch(err => {
@@ -14,15 +13,15 @@ router.get('/api/lists', (req, res, next) => {
 })
 
 //GET BY ID
-router.get('/api/lists/:id', (req, res, next)=>{
-  Lists.findById(req.params.id)
-    .then(list =>{
-      res.status(200).send(list)
-    })
-    .catch(err => {
-      res.status(400).send(err)
-    })
-})
+// router.get('/api/lists/:id', (req, res, next)=>{
+//   Lists.findById(req.params.id)
+//     .then(list =>{
+//       res.status(200).send(list)
+//     })
+//     .catch(err => {
+//       res.status(400).send(err)
+//     })
+// })
 
 //ADD
 router.post('/api/lists', (req, res, next) => {

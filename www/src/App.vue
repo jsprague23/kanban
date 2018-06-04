@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png"><br>
+    <img id = 'theV' src="./assets/logo.png"><br>
     <button @click="userLogout">LOGOUT</button>
     <router-view/>
   </div>
@@ -26,5 +26,8 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+  }
+  #theV{
+    width: 1.5rem;
   }
 </style>
