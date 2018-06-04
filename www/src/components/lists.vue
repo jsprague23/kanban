@@ -15,10 +15,13 @@
         </div>
       </modal>
     </div> -->
-    <div class="col-sm-2 my-3">
-<!-- <div class="car bg-dark text-white w-100 h-100"> -->
-<div class="card bg-dark text-white w-100 h-100" v-for="list in returnList">
+    <div class="col-sm-12 my-3 card-deck">
+<div class="card text-black w-100 h-500" v-for="list in returnList">
   <h3>{{list.title}}</h3>
+  <h5>{{list._id}}</h5>  <!--BUG BUG this is just temp -->
+//tasks listings
+<ktasks></ktasks>
+<!-- <button @click="createTask">New Task</button>   -->
 
 
 
@@ -33,12 +36,14 @@
 <script>
   import router from '../router'
   import modal from './modal'
-  export default {
+  import ktasks from './tasks'
+ 
+ export default {
     name: 'klists',
     mounted() {
       this.$store.dispatch('getLists', this.$route.params.id)
     },
-    components: { modal },
+    components: { modal, ktasks },
     props:['list'],
     data() {
       return {

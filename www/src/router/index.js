@@ -6,6 +6,7 @@ import register from '@/components/register'
 import modal from '@/components/modal'
 import board from '@/components/board'
 import klists from '@/components/lists'
+import ktasks from '@/components/tasks'
 // import del from '@components/Home'
 
 Vue.use(Router)
