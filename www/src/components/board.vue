@@ -23,7 +23,8 @@
 <script>
   import router from '../router'
   import modal from './modal'
-  import klists from './lists.vue'
+  import klists from './lists'
+  import ktasks from './tasks'
  
  export default {
     name: 'board',

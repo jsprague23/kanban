@@ -50,12 +50,17 @@ export default new vuex.Store({
     },
     setLists(state, lists){
       state.lists = lists
-
     },
     setList(state, list){
       state.list = list
-    }
-
+    },
+    setTasks(state, tasks){
+      console.log(tasks)
+      state.tasks = tasks
+    },
+    // Task(state, task){
+    //   state.task = task
+    // }
   },
   actions: {
 
@@ -121,8 +126,10 @@ export default new vuex.Store({
         alert("err") 
       })
     },
-    actionTask({ commit, dispatch }, task) {
-      api.post('/tasks', task)
+    actionTask({ commit, dispatch }, listId) {
+      debugger
+      api.post('/tasks', {
+        listId: 'listId'})
       .then(res=>{
         dispatch("getTasks")
         })
@@ -154,17 +161,17 @@ export default new vuex.Store({
         commit('setList', res.data)
       })
     },
-    getTasks({commit, dispatch}){
-      api.get('/tasks')
+    getTasks({commit, dispatch}, listId){
+      api.get('/tasks/' + listId)
       .then(res=>{
         commit("setTasks", res.data)
       })
     },
-    getTask({commit,dispatch}, taskId){
-      api.get('/tasks/'+ taskId)
-      .then(res=>{
-        commit('setTask', res.data)
-      })
-    },
+    // getTask({commit,dispatch}, taskId){
+    //   api.get('/tasks/'+ taskId)
+    //   .then(res=>{
+    //     commit('setTask', res.data)
+    //   })
+    // },
   }
 })

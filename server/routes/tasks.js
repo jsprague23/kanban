@@ -2,8 +2,10 @@ var router = require('express').Router()
 var Tasks = require('../models/task')
 
 //GET ALL
-router.get('/api/tasks', (req, res, next) => {
-  Tasks.find({})
+router.get('/api/tasks/:id', (req, res, next) => {
+ console.log(req.params.listId)
+ console.log(req.params.id)
+  Tasks.find({listId: req.params.id})
     .then(tasks => {
       res.status(200).send(tasks)
     })
@@ -13,19 +15,20 @@ router.get('/api/tasks', (req, res, next) => {
 })
 
 //GET BY ID
-router.get('/api/tasks/:id', (req, res, next)=>{
-  Tasks.findById(req.params.id)
-    .then(task =>{
-      res.status(200).send(task)
-    })
-    .catch(err => {
-      res.status(400).send(err)
-    })
-})
+// router.get('/api/tasks/:id', (req, res, next)=>{
+//   Tasks.findById(req.params.id)
+//     .then(task =>{
+//       res.status(200).send(task)
+//     })
+//     .catch(err => {
+//       res.status(400).send(err)
+//     })
+// })
 
 //ADD
 router.post('/api/tasks', (req, res, next) => {
   var task = req.body
+  console.log(req.params.listId)
   this.userId=req.session.uid
   Tasks.create(task)
     .then(newTask => {
