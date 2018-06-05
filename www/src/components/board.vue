@@ -3,6 +3,7 @@
     <h3 class="boards">{{returnBoard.title}}</h3>
     <div id="app">
       <button @click="toggleModal(1)">Create a List</button>
+      <button @click="">Delete List</button>
       <!-- use the modal component, pass in the prop -->
       <modal :toggle="showModal">
         <div slot="header">
