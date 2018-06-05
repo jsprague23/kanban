@@ -19,8 +19,9 @@
       <div class="card text-black w-100 h-500" v-for="list in returnList">
         <h3>{{list.title}}</h3>
         <h5>{{list._id}}</h5>
+        <button @click="">Delete List</button>
         <!--BUG BUG this is just temp -->
-        //tasks listings
+        <!-- //tasks listings -->
         <ktasks></ktasks>
         <!-- <button @click="createTask">New Task</button>   -->
 
