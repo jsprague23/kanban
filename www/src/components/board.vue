@@ -37,6 +37,7 @@
       return {
         showModal: 0,
         list: {
+          //is this right?
           boardId:this.$route.params.id,
           title: ''
         },

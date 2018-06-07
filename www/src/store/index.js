@@ -127,8 +127,7 @@ export default new vuex.Store({
       })
     },
     actionTask({ commit, dispatch }, listId) {
-      debugger
-      api.post('/tasks', {
+        api.post('/tasks', {
         listId: 'listId'})
       .then(res=>{
         dispatch("getTasks")
@@ -167,6 +166,13 @@ export default new vuex.Store({
         commit("setTasks", res.data)
       })
     },
+
+    deleteList({commit, dispatch}, list){
+      api.get('/lists/' + list)
+      .then (res=>{
+        dispatch('getLists')
+      })
+    }
     // getTask({commit,dispatch}, taskId){
     //   api.get('/tasks/'+ taskId)
     //   .then(res=>{

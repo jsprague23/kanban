@@ -19,7 +19,7 @@
       <div class="card text-black w-100 h-500" v-for="list in returnList">
         <h3>{{list.title}}</h3>
         <h5>{{list._id}}</h5>
-        <button @click="">Delete List</button>
+        <button @click="deleteList(list)">Delete List</button>
         <!--BUG BUG this is just temp -->
         <!-- //tasks listings -->
         <ktasks></ktasks>
@@ -43,13 +43,13 @@
       this.$store.dispatch('getLists', this.$route.params.id)
     },
     components: { modal, ktasks },
-    props: ['list'],
+    props: ['lists'],
     data() {
       return {
         showModal: 0,
-        lists: {
+        list: {
         },
-      }
+        }
     },
     computed: {
       returnList() {
@@ -64,6 +64,9 @@
       toggleModal(n) {
         this.showModal += n
       },
+      deleteList(list){
+        this.$store.dispatch('deleteList', list)
+      }
     }
   }
 </script>

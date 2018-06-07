@@ -39,7 +39,7 @@
       // this.$store.dispatch('getLists')
     },
     components: { modal },
-    props:['task'],
+    props:['tasks'],
     data() {
       return {
         showModal: 0,
