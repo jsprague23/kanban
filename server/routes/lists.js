@@ -12,16 +12,16 @@ Lists.find({boardId: req.params.id})
     })
 })
 
-//GET BY ID
-// router.get('/api/lists/:id', (req, res, next)=>{
-//   Lists.findById(req.params.id)
-//     .then(list =>{
-//       res.status(200).send(list)
-//     })
-//     .catch(err => {
-//       res.status(400).send(err)
-//     })
-// })
+// GET BY ID
+router.get('/api/lists/:id', (req, res, next)=>{
+  Lists.findById(req.params.id)
+    .then(list =>{
+      res.status(200).send(list)
+    })
+    .catch(err => {
+      res.status(400).send(err)
+    })
+})
 
 //ADD
 router.post('/api/lists', (req, res, next) => {

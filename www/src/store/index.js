@@ -55,7 +55,6 @@ export default new vuex.Store({
       state.list = list
     },
     setTasks(state, tasks){
-      console.log(tasks)
       state.tasks = tasks
     },
     // Task(state, task){
@@ -97,7 +96,7 @@ export default new vuex.Store({
         })
     },
     authenticate({ commit, dispatch }) {
-      auth.get('/authenticate')
+      auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'Home' })
@@ -109,7 +108,7 @@ export default new vuex.Store({
 
     //APP STUFF
     actionBoard({ commit, dispatch }, board) {
-      api.post('/boards', board)
+      api.post('boards', board)
       .then(res=>{
         dispatch("getBoards")
         })
@@ -118,7 +117,7 @@ export default new vuex.Store({
       })
     },
     actionList({ commit, dispatch }, list) {
-       api.post('/lists', list)
+       api.post('lists', list)
       .then(res=>{
         dispatch("getLists")
         })
@@ -127,7 +126,7 @@ export default new vuex.Store({
       })
     },
     actionTask({ commit, dispatch }, listId) {
-        api.post('/tasks', {
+        api.post('tasks', {
         listId: 'listId'})
       .then(res=>{
         dispatch("getTasks")
@@ -137,38 +136,38 @@ export default new vuex.Store({
       })
     },
     getBoards({commit, dispatch}, user){
-      api.get('/ownedboards/'+ user)
+      api.get('ownedboards/'+ user)
       .then(res=>{
         commit("setBoards", res.data)
       })
     },
     getBoard({commit,dispatch}, boardId){
-      api.get('/boards/'+ boardId)
+      api.get('boards/'+ boardId)
       .then(res=>{
         commit('setBoard', res.data)
       })
     },
     getLists({commit, dispatch}, boardId){
-      api.get('/lists/'+ boardId)
+      api.get('lists/'+ boardId)
       .then(res=>{
         commit("setLists", res.data)
       })
     },
     getList({commit,dispatch}, listId){
-      api.get('/lists/'+ listId)
+      api.get('lists/'+ listId)
       .then(res=>{
         commit('setList', res.data)
       })
     },
     getTasks({commit, dispatch}, listId){
-      api.get('/tasks/' + listId)
+      api.get('tasks/' + listId)
       .then(res=>{
         commit("setTasks", res.data)
       })
     },
 
-    deleteList({commit, dispatch}, list){
-      api.get('/lists/' + list)
+    deleteList({commit, dispatch}, id){
+      api.delete('lists/')
       .then (res=>{
         dispatch('getLists')
       })

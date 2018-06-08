@@ -65,7 +65,7 @@
         this.showModal += n
       },
       deleteList(list){
-        this.$store.dispatch('deleteList', list)
+        this.$store.dispatch('deleteList')
       }
     }
   }
