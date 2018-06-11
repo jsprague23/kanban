@@ -1,16 +1,16 @@
-let mongoose =require ('mongoose')
+let mongoose = require('mongoose')
 let Schema = mongoose.Schema
-let ObjectId= Schema.Types.ObjectId
+let ObjectId = Schema.Types.ObjectId
 
 let schemaName = 'Comment'
 
-let schema = new Schema ({
-  body : { type: String},
-  author: {type: ObjectId, ref: 'User'},
-  boardId:{type: ObjectId},
-  listId:{type: ObjectId},
-  taskId:{type:ObjectId, required: true},
-  createDate:{type: Number, default: Date.now(), required: true}
+let schema = new Schema({
+  body: {type: String},
+  author: {type: ObjectId, ref: 'user'},
+  boardId: {type: ObjectId, ref: 'boards'},
+  listId: {type: ObjectId, ref: 'list'},
+  taskId: {type: ObjectId, required: true, ref: 'tasks'},
+  createDate: {type: Number, default: Date.now(), required: true}
 })
 
-module.exports=mongoose.model(schemaName, schema)
+module.exports = mongoose.model(schemaName, schema)

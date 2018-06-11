@@ -1,7 +1,7 @@
 var router = require('express').Router()
 var Boards = require('../models/board')
 
-//creates board
+// creates board
 router.post('/api/boards', (req, res, next) => {
   var board = req.body
   board.author = req.session.uid
@@ -14,18 +14,18 @@ router.post('/api/boards', (req, res, next) => {
     })
 })
 
-//finds all boards by creator id still not sure if working
+// finds all boards by creator id still not sure if working
 router.get('/api/ownedboards/:id', (req, res, next) => {
   Boards.find({author: req.params.id})
     .then(boards => {
-      res.status(200).send(boards)
+      return res.status(200).send(boards)
     })
     .catch(err => {
       res.status(400).send(err)
     })
 })
 
-//GET BY ID
+// GET BY ID
 router.get('/api/boards/:id', (req, res, next)=>{
   Boards.findById(req.params.id)
     .then(board =>{
@@ -36,12 +36,7 @@ router.get('/api/boards/:id', (req, res, next)=>{
     })
 })
 
-
-module.exports = {
-  router
-}
-
-//EDIT
+// EDIT
 router.put('/api/boards/:id', (req, res, next) => {
   Boards.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(board => {
@@ -52,7 +47,7 @@ router.put('/api/boards/:id', (req, res, next) => {
     })
 })
 
-//DESTROY
+// DESTROY
 router.delete('/api/boards/:id', (req, res, next)=>{
   Boards.findByIdAndRemove(req.params.id)
     .then(data=>{
@@ -63,6 +58,6 @@ router.delete('/api/boards/:id', (req, res, next)=>{
     })
 })
 
-// module.exports = {
-//   router
-// }
+module.exports = {
+  router
+}
