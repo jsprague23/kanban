@@ -1,10 +1,10 @@
 var router = require('express').Router()
 var Lists = require('../models/list')
 
-//GET ALL
-router.get('/api/lists/:id', (req, res, next) => {
-Lists.find({boardId: req.params.id})
-  .then(lists => {
+// GET ALL
+router.get('/api/currentlists/:id', (req, res, next) => {
+  Lists.find({ boardId: req.params.id })
+    .then(lists => {
       res.status(200).send(lists)
     })
     .catch(err => {
@@ -13,9 +13,9 @@ Lists.find({boardId: req.params.id})
 })
 
 // GET BY ID
-router.get('/api/lists/:id', (req, res, next)=>{
+router.get('/api/lists/:id', (req, res, next) => {
   Lists.findById(req.params.id)
-    .then(list =>{
+    .then(list => {
       res.status(200).send(list)
     })
     .catch(err => {
@@ -23,10 +23,10 @@ router.get('/api/lists/:id', (req, res, next)=>{
     })
 })
 
-//ADD
+// ADD
 router.post('/api/lists', (req, res, next) => {
   var list = req.body
-  this.userId=req.session.uid
+  this.userId = req.session.uid
   Lists.create(list)
     .then(newList => {
       res.status(200).send(newList)
@@ -36,22 +36,22 @@ router.post('/api/lists', (req, res, next) => {
     })
 })
 
-//EDIT
+// EDIT
 router.put('/api/lists/:id', (req, res, next) => {
-  Lists.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  Lists.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(list => {
-      res.status(200).send({message: "Successfully Updated", list})
+      res.status(200).send({ message: 'Successfully Updated', list })
     })
     .catch(err => {
       res.status(400).send(err)
     })
 })
 
-//DESTROY
-router.delete('/api/lists/:id', (req, res, next)=>{
+// DESTROY
+router.delete('/api/lists/:id', (req, res, next) => {
   Lists.findByIdAndRemove(req.params.id)
-    .then(data=>{
-      res.send("Successfully Deleted List")
+    .then(data => {
+      res.send('Successfully Deleted List')
     })
     .catch(err => {
       res.status(400).send(err)

@@ -19,29 +19,35 @@
     </div>
     <ul class="boards">
       <h3>My Boards</h3>
-      <li class="boards" v-for="board in boards"><router-link :to="{name: 'Board', params:{id:board._id}}">{{board.title}}</router-link></li>
+      <li class="boards" v-for="board in boards" ><router-link :to="{name: 'board', params:{id:board._id}}">{{board.title}}</router-link></li>
     </ul>
   </div>
 </template>
 
 <script>
   import router from '../router'
-  import modal from './modal'
+  import modal from './Modal'
+  import board from './Board'
+
   export default {
-    name: '',
-    components: { modal },
+    name: 'home',
+    components: { modal, board },
     mounted() {
       if (!this.$store.state.user._id) {
         router.push({ name: 'login' })
       }
-      this.$store.dispatch('getBoards', this.$store.state.user._id)
+      this.$nextTick(function() {
+        this.listBoards()
+      })
     },
     data() {
       return {
         showModal: 0,
         board:{
-          title: ''
         },
+        user:{
+          _id: ''
+        }
         
       }
     },
@@ -58,6 +64,9 @@
       toggleModal(n){
         this.showModal += n
       },
+      listBoards() {
+        this.$store.dispatch('getBoards', this.$store.state.user._id)
+      }
     }
   }
 </script>

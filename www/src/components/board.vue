@@ -1,6 +1,6 @@
 <template>
   <div class="board-page">
-    <h3 class="boards">{{returnBoard.title}}</h3>
+    <h3 class="boards">BOARD: {{returnBoard.title}}</h3>
     <div id="app">
       <button @click="toggleModal(1)">Create a List</button>
       <button @click="">Delete Board</button> <!-- use the modal component, pass in the prop -->
@@ -22,20 +22,22 @@
 
 <script>
   import router from '../router'
-  import modal from './modal'
-  import klists from './lists'
-  import ktasks from './tasks'
+  import modal from './Modal'
+  import klists from './Lists'
+  import ktasks from './Tasks'
  
  export default {
     name: 'board',
     mounted() {
-      // this.$store.dispatch('getBoard', this.$route.params.id)
-      // this.$store.dispatch('getLists')
+       this.$store.dispatch('getBoard', this.$route.params.id)
+       this.$store.dispatch('getLists')
     },
     components: { modal, klists },
     data() {
       return {
         showModal: 0,
+        board:{
+        },
         list: {
           //is this right?
           boardId:this.$route.params.id,

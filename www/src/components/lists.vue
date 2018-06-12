@@ -18,7 +18,8 @@
     <div class="col-sm-12 my-3 card-deck">
       <div class="card text-black w-100 h-500" v-for="list in returnList">
         <h3>{{list.title}}</h3>
-        <h5>{{list._id}}</h5>
+        <h5>Board: {{list.boardId}}</h5>
+        <h5>list: {{list._id}}</h5>
         <button @click="deleteList(list)">Delete List</button>
         <!--BUG BUG this is just temp -->
         <!-- //tasks listings -->
@@ -34,8 +35,8 @@
 
 <script>
   import router from '../router'
-  import modal from './modal'
-  import ktasks from './tasks'
+  import modal from './Modal'
+  import ktasks from './Tasks'
 
   export default {
     name: 'klists',
@@ -47,7 +48,7 @@
     data() {
       return {
         showModal: 0,
-        list: {
+        tasks: {
         },
         }
     },

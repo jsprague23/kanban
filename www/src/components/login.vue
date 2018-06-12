@@ -15,7 +15,7 @@
 
 <script>
   export default {
-    name: '',
+    name: 'Login',
     mounted(){
       this.$store.dispatch('authenticate')
     },
@@ -33,7 +33,7 @@
         this.$store.dispatch('login', this.login)
       },
        userReg(){
-        this.$router.push({name: 'Register'})
+        this.$router.push({name: 'register'})
        }
        
     }

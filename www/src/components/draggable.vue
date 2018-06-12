@@ -6,7 +6,9 @@
 
 <script>
   import router from '../router'
-  export default {
+  import modal from './Modal'
+
+export default {
     name: 'tasks',
     mounted() {
       this.$store.dispatch('getLists', this.$route.params.id)

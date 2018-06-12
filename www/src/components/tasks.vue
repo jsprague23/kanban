@@ -28,8 +28,8 @@
 
 <script>
   import router from '../router'
-  import modal from './modal'
-  import klist from './lists'
+  import modal from './Modal'
+  import klist from './Lists'
   
   export default {
     name: 'ktasks',
@@ -43,11 +43,12 @@
     data() {
       return {
         showModal: 0,
-         task: {
-            listId: this.$route.params.id,
-            title: "",
-            body:"" 
-           }
+        //  task: {
+        //     listId: this.$route.params.id,
+        //     title: "",
+        //     body:"" 
+        //    }
+           list: {}
       }
     },
     computed: {
