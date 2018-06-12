@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="header animated rubberBand"><h1>ListyMcListface</h1></div>
     <img id = 'theV' src="./assets/logo.png"><br>
     <button @click="userLogout">LOGOUT</button>
     <router-view/>
@@ -25,7 +26,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
   #theV{
     width: 1.5rem;

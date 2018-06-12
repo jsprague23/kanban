@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div class="home-page" id="background">
     Main
     <!-- <button type="@click=createBoard">Create a Board</button> -->
     <div id="app">
@@ -70,3 +70,13 @@
     }
   }
 </script>
+
+<style>
+  #background {
+    background-image: url("../assets/pencil.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    color: white;
+  }
+</style>

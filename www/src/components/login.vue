@@ -1,5 +1,5 @@
 <template>
-  <div class="login-page">
+  <div class="login-page" id="background">
     <form  @submit.prevent="userLogin">
       <label for="text">Email</label>
       <input type="text" name="email" id="email" v-model="login.email">
@@ -41,4 +41,12 @@
 </script>
 
 <style>
+  #background {
+    background-image: url("../assets/pencil.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    color: white;
+    height: 80vh;
+  }
 </style>
