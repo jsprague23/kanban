@@ -69,7 +69,7 @@ export default new vuex.Store({
       auth.post('login', loginCredentials)
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'Home' })
+          router.push({ name: 'home' })
         })
         .catch(res => {
           console.log(res.data)
@@ -89,7 +89,7 @@ export default new vuex.Store({
       auth.post('register', registerCredentials)
         .then(res => {
           commit('regUser', res.data)
-          router.push({ name: 'Home' })
+          router.push({ name: 'home' })
         })
         .catch(res => {
           console.log(res.data)
@@ -99,7 +99,7 @@ export default new vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'Home' })
+          router.push({ name: 'home' })
         })
         .catch(res => {
           console.log(res.data)

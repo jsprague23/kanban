@@ -7,7 +7,7 @@ import modal from '@/components/modal'
 import board from '@/components/board'
 import klists from '@/components/lists'
 import ktasks from '@/components/tasks'
-import draggable from '@components/draggable'
+// import draggable from '@components/draggable'
 
 // import del from '@components/Home'
 
@@ -45,6 +45,11 @@ export default new Router({
   path: 'tasks/:id',
   name: 'task',
   component: ktasks
-}
+},
+// {
+// path: 'draggable',
+// name: 'draggable',
+// component: draggable
+// }
   ]
 })
