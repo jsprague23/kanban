@@ -3,21 +3,21 @@ import vuex from 'vuex'
 import axios from 'axios'
 import router from '../router'
 
-var production = !window.location.host.includes("localhost");
-var baseUrl = production ? "//khanbhan.herokuapp.com/" : "//localhost:3000/";
+var production = !window.location.host.includes('localhost')
+var baseUrl = production ? '//khanbhan.herokuapp.com/' : '//localhost:3000/'
 
-vue.use(vuex);
+vue.use(vuex)
 
 var api = axios.create({
   baseURL: baseUrl + 'api/',
   timeout: 3000,
   withCredentials: true
-});
+})
 var auth = axios.create({
   baseURL: baseUrl + 'auth/',
   timeout: 3000,
   withCredentials: true
-});
+})
 
 export default new vuex.Store({
   state: {
@@ -72,10 +72,10 @@ export default new vuex.Store({
           router.push({ name: 'home' })
         })
         .catch(res => {
-          console.log(res.data);
+          console.log(res.data)
         })
     },
-    logout ({ commit, dispatch }, deleteCredentials) {
+    logout({ commit, dispatch }, deleteCredentials) {
       auth
         .delete('logout', deleteCredentials)
         .then(res => {
@@ -109,7 +109,7 @@ export default new vuex.Store({
         })
     },
 
-    //APP STUFF
+    // APP STUFF
     actionBoard ({ commit, dispatch }, board) {
       api
         .post('boards', board)
@@ -141,14 +141,19 @@ export default new vuex.Store({
         })
     },
     getBoards ({ commit, dispatch, state }) {
-      api.get('ownedboards/' + state.user._id).then(res => {
-        commit('setBoards', res.data)
-      })
+      api
+        .get('ownedboards/' + state.user._id)
+        .then(res => {
+          commit('setBoards', res.data)
+        })
+        .catch(res => {
+          console.log(res)
+        })
     },
     getBoard ({ commit, dispatch }, boardId) {
       api.get('boards/' + boardId).then(res => {
         commit('setBoard', res.data)
-      });
+      })
     },
     getLists ({ commit, dispatch, state }) {
       console.log(this.state.board._id + 'index-board')

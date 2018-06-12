@@ -64,4 +64,7 @@
 </script>
 
 <style>
+.board-page{
+  background-color:blueviolet;
+}
 </style>

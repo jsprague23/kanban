@@ -18,7 +18,7 @@
         </div>
       </modal>
     </div>
-    <div class="tasks" v-for="task in returnTasks">
+    <div class="tasks" v-for="task in returnTasks" :key="task._id">
       <!-- <h3>{{returnTask.title}}</h3>
       <h3>{{returnTask.body}}</h3> -->
       </div>
@@ -39,7 +39,7 @@
       // this.$store.dispatch('getLists')
     },
     components: { modal },
-    props:['tasks'],
+    props:['list'],
     data() {
       return {
         showModal: 0,
@@ -72,4 +72,7 @@
 </script>
 
 <style>
+.task-page{
+  background-color:aqua
+}
 </style>

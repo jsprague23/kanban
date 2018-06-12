@@ -19,7 +19,7 @@
     </div>
     <ul class="boards">
       <h3>My Boards</h3>
-      <li class="boards" v-for="board in boards" ><router-link :to="{name: 'board', params:{id:board._id}}">{{board.title}}</router-link></li>
+      <li class="boards" v-for="board in boards" :key="board._id" ><router-link :to="{name: 'board', params:{id:board._id}}">{{board.title}}</router-link></li>
     </ul>
   </div>
 </template>
@@ -70,3 +70,8 @@
     }
   }
 </script>
+<style>
+.home-page{
+  background-color:coral;
+}
+</style>

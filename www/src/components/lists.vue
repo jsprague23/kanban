@@ -41,10 +41,12 @@
   export default {
     name: 'klists',
     mounted() {
-      this.$store.dispatch('getLists', this.$route.params.id)
+     this.$nextTick(function() {
+      this.displayList()
+     })
     },
     components: { modal, ktasks },
-    props: ['lists'],
+    props: ['board'],
     data() {
       return {
         showModal: 0,
@@ -67,10 +69,17 @@
       },
       deleteList(list){
         this.$store.dispatch('deleteList')
+      },
+      displayList() {
+        this.$store.dispatch('getLists', this.$route.params.id)
       }
     }
   }
 </script>
 
 <style>
+.list-page{
+  background-color:crimson;
+}
+
 </style>
