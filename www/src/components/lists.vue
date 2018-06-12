@@ -23,7 +23,7 @@
         <button @click="deleteList(list)">Delete List</button>
         <!--BUG BUG this is just temp -->
         <!-- //tasks listings -->
-        <ktasks></ktasks>
+        <ktasks : task='returnList'</ktasks>
         <!-- <button @click="createTask">New Task</button>   -->
 
 
@@ -41,12 +41,16 @@
   export default {
     name: 'klists',
     mounted() {
-     this.$nextTick(function() {
-      this.displayList()
-     })
+    //  this.$nextTick(function() {
+    //   this.displayList()
+    //  })
     },
     components: { modal, ktasks },
-    props: ['board'],
+    props: {
+      board: {
+
+      }
+    },
     data() {
       return {
         showModal: 0,

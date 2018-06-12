@@ -36,9 +36,9 @@
       if (!this.$store.state.user._id) {
         router.push({ name: 'login' })
       }
-      this.$nextTick(function() {
-        this.listBoards()
-      })
+      // this.$nextTick(function() {
+      //   this.listBoards()
+      // })
     },
     data() {
       return {

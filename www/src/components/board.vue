@@ -16,7 +16,7 @@
         </div>
       </modal>
     </div>
-    <klists></klists>
+    <klists :list='returnBoard'></klists>
   </div>
 </template>
 
@@ -29,8 +29,8 @@
  export default {
     name: 'board',
     mounted() {
-       this.$store.dispatch('getBoard', this.$route.params.id)
-       this.$store.dispatch('getLists')
+      //  this.$store.dispatch('getBoard', this.$route.params.id)
+      //  this.$store.dispatch('getLists')
     },
     components: { modal, klists },
     data() {
